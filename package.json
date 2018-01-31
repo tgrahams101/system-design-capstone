@@ -18,7 +18,9 @@
   "homepage": "https://github.com/tgrahams101/system-design-capstone#readme",
   "dependencies": {
     "aws-sdk": "^2.188.0",
+    "bluebird": "^3.5.1",
     "express": "^4.16.2",
-    "nodemon": "^1.14.11"
+    "nodemon": "^1.14.11",
+    "pg-promise": "^7.4.1"
   }
 }
