@@ -20,6 +20,8 @@
     "aws-sdk": "^2.188.0",
     "bluebird": "^3.5.1",
     "express": "^4.16.2",
+    "faker": "^4.1.0",
+    "newrelic": "^2.6.1",
     "nodemon": "^1.14.11",
     "pg-promise": "^7.4.1"
   }

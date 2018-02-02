@@ -1,5 +1,7 @@
+const newRelic = require('newrelic');
 const express = require('express');
 const app = express();
+const database = require('./database/index.js');
 
 app.get('/', (req, res) => {
   res.send('Hello World');
