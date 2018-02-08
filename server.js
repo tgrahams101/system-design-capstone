@@ -33,13 +33,13 @@ app.get('/getmovie', (req, res) => {
   })
 })
 
-app.get('/getmany', (req, res) => {
-
-  queries.findMany(req.query.list, (error, array) => {
+app.post('/getmany', (req, res) => {
+  // console.log(req.body.list);
+  queries.findMany(req.body.list, (error, array) => {
     if (error) {
       res.send('ERROR BRUH');
     } else {
-      console.log('MULTI QUERY WORKED!');
+      // console.log(array.length)
       res.json(array);
     }
   })
@@ -58,5 +58,14 @@ app.post('/addmovie', (req, res) => {
       res.send(movie)
     }
   })
+
+})
+
+app.patch('/updatemovie', (req, res) => {
+  let reqQuery = req.query;
+  queries.updateOne(reqQuery, (error, update) => {
+
+  })
+
 
 })

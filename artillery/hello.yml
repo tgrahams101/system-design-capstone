@@ -1,0 +1,29 @@
+config:
+  target: 'http://localhost:3000'
+  http:
+    #allow requests to take up to 10 minutes!
+    timeout: 600
+    pool: 100
+  phases:
+    - duration: 30
+      arrivalRate: 5
+      rampTo: 50
+    - duration: 30
+      arrivalRate: 50
+      rampTo: 100
+    - duration: 60
+      arrivalRate: 100
+
+
+
+  defaults:
+    headers:
+      x-my-service-auth: '987401838271002188298567'
+scenarios:
+  - flow:
+    - loop:
+      - post:
+          url: "/getmany"
+          form:
+            list: '[1203,1204,1206,1402]'
+      count: 100

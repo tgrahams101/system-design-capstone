@@ -15,25 +15,27 @@ const findOne = (id, cb) => {
 
 }
 
-const findMany = (string, cb) => {
-  let arrayOfIds = string.replace(' ', '').split(',').map( (item) => {
-    return parseInt(item);
-  })
+const findMany = (stringifiedArray, cb) => {
+  // console.log('STRINGIFIED INPUT', stringifiedArray, Array.isArray(stringifiedArray), typeof stringifiedArray);
+
+  let arrayOfIds = JSON.parse(stringifiedArray);
+  // console.log('ARRAY FOR PARSE', arrayOfIds, Array.isArray(arrayOfIds), typeof arrayOfIds);
+
+  // let arrayOfIds = string.replace(' ', '').split(',').map( (item) => {
+  //   return parseInt(item);
+  // })
 
   let arrayOfQueries = arrayOfIds.map( (item) => {
-    return `SELECT * FROM movies WHERE id = ${item}`;
+    return `SELECT * FROM movies WHERE movie_id = ${item}`;
   });
 
-  console.log(arrayOfQueries);
   let queryForMulti = arrayOfQueries.join(';');
 
   db.multi(queryForMulti)
     .then( data => {
-      console.log('SUCCESSFUL MULTI QUERY', data);
       cb(null, data);
     })
     .catch( error => {
-      console.log('ERROR MAN', error)
       cb(error, null)
     })
 
@@ -75,8 +77,15 @@ const addOne = (movieObject, cb) => {
 }
 
 
+const updateOne = (reqQuery, cb) => {
+  let arrayOfKeys = Object.keys(reqQuery);
+
+
+}
+
 module.exports = {
   findOne,
   findMany,
-  addOne
+  addOne,
+  updateOne
 }

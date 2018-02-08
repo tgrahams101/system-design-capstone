@@ -27,7 +27,7 @@ const db = pgp(cn);
 
 db.connect()
     .then(function (obj) {
-      console.log('IT WORKS!');
+      // console.log('IT WORKS!');
         obj.done(); // success, release connection;
     })
     .catch(function (error) {

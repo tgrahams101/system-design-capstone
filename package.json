@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/tgrahams101/system-design-capstone#readme",
   "dependencies": {
+    "artillery": "^1.6.0-12",
     "aws-sdk": "^2.188.0",
     "bluebird": "^3.5.1",
     "body-parser": "^1.18.2",
