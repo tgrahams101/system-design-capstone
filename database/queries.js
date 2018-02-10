@@ -1,5 +1,8 @@
 const db = require('./index.js').db;
 const pgp = require('./index.js').pgp;
+const redis = require('redis');
+
+const redisClient = redis.createClient();
 
 const findOne = (id, cb) => {
 
@@ -16,14 +19,9 @@ const findOne = (id, cb) => {
 }
 
 const findMany = (stringifiedArray, cb) => {
-  // console.log('STRINGIFIED INPUT', stringifiedArray, Array.isArray(stringifiedArray), typeof stringifiedArray);
+
 
   let arrayOfIds = JSON.parse(stringifiedArray);
-  // console.log('ARRAY FOR PARSE', arrayOfIds, Array.isArray(arrayOfIds), typeof arrayOfIds);
-
-  // let arrayOfIds = string.replace(' ', '').split(',').map( (item) => {
-  //   return parseInt(item);
-  // })
 
   let arrayOfQueries = arrayOfIds.map( (item) => {
     return `SELECT * FROM movies WHERE movie_id = ${item}`;
@@ -33,6 +31,7 @@ const findMany = (stringifiedArray, cb) => {
 
   db.multi(queryForMulti)
     .then( data => {
+      redisClient.set(stringifiedArray, JSON.stringify(data));
       cb(null, data);
     })
     .catch( error => {

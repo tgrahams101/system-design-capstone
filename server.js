@@ -4,6 +4,9 @@ const app = express();
 const database = require('./database/index.js');
 const bodyParser = require('body-parser');
 const queries = require('./database/queries.js');
+const redis = require('redis');
+
+const redisClient = redis.createClient();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -15,8 +18,24 @@ app.listen(3000, () => {
   console.log('Example app listening on port 3000');
 })
 
+const checkRedis = (req, res, next) => {
+
+  let stringifiedArray = req.body.list;
+
+  redisClient.get(stringifiedArray, (err, data) => {
+    if (err) {
+      throw error;
+    }
+    if (data != null) {
+        res.send(JSON.parse(data));
+    } else {
+      next();
+    }
+  })
+}
+
 app.get('/', (req, res) => {
-  res.send('Hello World');
+  res.send('Hello World!');
 })
 
 
@@ -33,17 +52,15 @@ app.get('/getmovie', (req, res) => {
   })
 })
 
-app.post('/getmany', (req, res) => {
-  // console.log(req.body.list);
+app.post('/getmany', checkRedis, (req, res) => {
+
   queries.findMany(req.body.list, (error, array) => {
     if (error) {
-      res.send('ERROR BRUH');
+      res.send(error);
     } else {
-      // console.log(array.length)
       res.json(array);
     }
   })
-
 })
 
 app.post('/addmovie', (req, res) => {
@@ -52,10 +69,10 @@ app.post('/addmovie', (req, res) => {
   queries.addOne(req.body, (error, movie) => {
     if (error) {
       console.log('ERROR BRUH', error);
-      res.send()
+      res.send(error);
     } else {
       console.log('THE MOVIE BRUH', movie);
-      res.send(movie)
+      res.send(movie);
     }
   })
 
@@ -69,3 +86,5 @@ app.patch('/updatemovie', (req, res) => {
 
 
 })
+
+module.exports.redisClient = redisClient;

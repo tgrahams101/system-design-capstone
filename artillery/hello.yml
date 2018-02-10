@@ -26,4 +26,4 @@ scenarios:
           url: "/getmany"
           form:
             list: '[1203,1204,1206,1402]'
-      count: 100
+      count: 50
