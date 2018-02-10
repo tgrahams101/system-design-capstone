@@ -17,12 +17,15 @@
   },
   "homepage": "https://github.com/tgrahams101/system-design-capstone#readme",
   "dependencies": {
+    "artillery": "^1.6.0-12",
     "aws-sdk": "^2.188.0",
     "bluebird": "^3.5.1",
+    "body-parser": "^1.18.2",
     "express": "^4.16.2",
     "faker": "^4.1.0",
     "newrelic": "^2.6.1",
     "nodemon": "^1.14.11",
-    "pg-promise": "^7.4.1"
+    "pg-promise": "^7.4.1",
+    "redis": "^2.8.0"
   }
 }

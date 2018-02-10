@@ -5,7 +5,7 @@ CREATE DATABASE movies;
 
 CREATE Table movies (
   id SERIAL PRIMARY KEY,
-  movie_id INTEGER,
+  movie_id INTEGER NOT NULL UNIQUE,
   title VARCHAR(255),
   category VARCHAR (100),
   description VARCHAR(255),
