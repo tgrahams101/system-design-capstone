@@ -39,3 +39,6 @@ bower_components/
 # ignore keys
 /src/utils/config.js
 *config.js
+
+# ignore redis
+*.rdb
