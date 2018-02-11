@@ -41,7 +41,7 @@ app.get('/', (req, res) => {
 
 
 app.get('/getmovie', (req, res) => {
-  console.log('THE QUERY', req.query.id);
+  console.log('THE QUERY', req.query.id, typeof req.query.id);
   const queryId = req.query.id;
   queries.findOne(queryId, (err, value) => {
     if (err){
