@@ -2,7 +2,7 @@ const db = require('./index.js').db;
 const pgp = require('./index.js').pgp;
 const redis = require('redis');
 
-const redisClient = redis.createClient();
+// const redisClient = redis.createClient();
 
 const findOne = (id, cb) => {
 
@@ -31,7 +31,7 @@ const findMany = (stringifiedArray, cb) => {
 
   db.multi(queryForMulti)
     .then( data => {
-      redisClient.set(stringifiedArray, JSON.stringify(data));
+      // redisClient.set(stringifiedArray, JSON.stringify(data));
       cb(null, data);
     })
     .catch( error => {

@@ -21,9 +21,17 @@ const db = require('./index.js').db;
 async function getLastMovie() {
   try {
     let movieArray = await db.any('SELECT * from movies ORDER BY ID desc limit 1');
-    console.log('MOVIE ARRAY', movieArray, Array.isArray(movieArray), typeof movieArray, movieArray[0], 'THEEEEE ID', movieArray[0].movie_id);
+    // if (!!movieArray[0].movie_id) {
+    //   console.log('MOVIE ARRAY', movieArray, Array.isArray(movieArray), typeof movieArray, movieArray[0], 'THEEEEE ID', movieArray[0].movie_id);
+    //
+    // }
     const cs = new pgp.helpers.ColumnSet(['movie_id', 'title', 'category'], {table: 'movies'});
-    let movie = movieArray[0];
+    let movie;
+    if (!movieArray[0]) {
+      movie = {movie_id: 0};
+    } else {
+      movie = movieArray[0];
+    }
     let values = [];
     console.log('MOVIE BEFORE LOOP', movie);
     console.log('THE MOVIE ID', movie.movie_id)

@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const queries = require('./database/queries.js');
 const redis = require('redis');
 
-const redisClient = redis.createClient();
+// const redisClient = redis.createClient();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -18,21 +18,21 @@ app.listen(3000, () => {
   console.log('Example app listening on port 3000');
 })
 
-const checkRedis = (req, res, next) => {
-
-  let stringifiedArray = req.body.list;
-
-  redisClient.get(stringifiedArray, (err, data) => {
-    if (err) {
-      throw error;
-    }
-    if (data != null) {
-        res.send(JSON.parse(data));
-    } else {
-      next();
-    }
-  })
-}
+// const checkRedis = (req, res, next) => {
+//
+//   let stringifiedArray = req.body.list;
+//
+//   redisClient.get(stringifiedArray, (err, data) => {
+//     if (err) {
+//       throw error;
+//     }
+//     if (data != null) {
+//         res.send(JSON.parse(data));
+//     } else {
+//       next();
+//     }
+//   })
+// }
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
@@ -52,7 +52,7 @@ app.get('/getmovie', (req, res) => {
   })
 })
 
-app.post('/getmany', checkRedis, (req, res) => {
+app.post('/getmany', (req, res) => {
 
   queries.findMany(req.body.list, (error, array) => {
     if (error) {
@@ -87,4 +87,4 @@ app.patch('/updatemovie', (req, res) => {
 
 })
 
-module.exports.redisClient = redisClient;
+// module.exports.redisClient = redisClient;
