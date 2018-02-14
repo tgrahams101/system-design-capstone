@@ -1,5 +1,6 @@
 config:
-  target: 'http://localhost:3000'
+  # target: 'http://localhost:3000'
+  target: 'http://ec2-34-210-202-243.us-west-2.compute.amazonaws.com:3000'
   http:
     #allow requests to take up to 10 minutes!
     timeout: 600
