@@ -2,7 +2,7 @@ const db = require('./index.js').db;
 const pgp = require('pg-promise')({
   capSQL: true
 });
-const cs = new pgp.helpers.ColumnSet(['title', 'category'], {table: 'movies'});
+const cs = new pgp.helpers.ColumnSet(['title', 'category', 'movie_id'], {table: 'movies'});
 
 
 db.tx('massive-insert', t => {
@@ -35,8 +35,10 @@ db.tx('massive-insert', t => {
                 const idx = pageIndex * 10000 + i; // to insert unique product names
                 data.push({
                     title: 'product-' + idx,
-                    category: 'thriller'
+                    category: 'thriller',
+                    movie_id: idx
                 });
+
             }
         }
         return Promise.resolve(data);

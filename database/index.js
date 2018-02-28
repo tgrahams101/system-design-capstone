@@ -22,12 +22,21 @@ const cn = {
     port: 5432, // 5432 is the default;
     database: 'movies',
 };
-const db = pgp(cn);
+
+const Ec2cn = {
+  host: 'ec2-34-215-237-38.us-west-2.compute.amazonaws.com',
+  port: 5432,
+  database: 'movies',
+  user: 'power_user',
+  password: 'power_user'
+}
+
+const db = pgp(Ec2cn);
 // var db = pgp('invalid connection string');
 
 db.connect()
     .then(function (obj) {
-      // console.log('IT WORKS!');
+      console.log('IT WORKS!');
         obj.done(); // success, release connection;
     })
     .catch(function (error) {
