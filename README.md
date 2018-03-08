@@ -54,7 +54,7 @@
 300 MS latency
 ```
 
-###On Amazon Web Services EC2 Machine
+### On Amazon Web Services EC2 Machine
 ======
 
 #### Base-line
