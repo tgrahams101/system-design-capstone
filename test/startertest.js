@@ -10,10 +10,8 @@ chai.use(chaiHttp);
 describe('Server', function() {
 
   it('Server works', function (done) {
-
     axios('http://localhost:3000')
     .then( (data) => {
-      console.log('REQUEST DATA', data);
       expect(data.data).to.equal('Hello World!');
       expect(data.status).to.equal(200);
       done();
@@ -21,12 +19,10 @@ describe('Server', function() {
   });
 
   it('Get a Single movie Id works', function (done) {
-
     chai.request('http://localhost:3000')
       .get('/getmovie')
       .query({id: 1399})
       .then(function (res) {
-        console.log('RESPONSE OBJECT', typeof res.body);
         expect(res).to.have.status(200);
         expect(res.body[0]).to.have.property('movie_id');
         expect(res.body[0]).to.have.property('title');
@@ -35,7 +31,5 @@ describe('Server', function() {
       .catch(function (err) {
         throw err;
       })
-
   });
-
 })

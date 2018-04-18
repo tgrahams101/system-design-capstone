@@ -36,11 +36,9 @@ const db = pgp(Ec2cn);
 
 db.connect()
     .then(function (obj) {
-      console.log('IT WORKS!');
         obj.done(); // success, release connection;
     })
     .catch(function (error) {
-        console.log("ERROR:", error.message);
     });
 
 module.exports = {
