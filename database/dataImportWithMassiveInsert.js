@@ -17,15 +17,11 @@ db.tx('massive-insert', t => {
     });
 })
     .then(data => {
-        // COMMIT has been executed
-        console.log('Total batches:', data.total, ', Duration:', data.duration);
+
     })
     .catch(error => {
-        // ROLLBACK has been executed
-        console.log(error);
+
     });
-
-
 
     function getNextData(t, pageIndex) {
         let data = null;
@@ -38,8 +34,7 @@ db.tx('massive-insert', t => {
                     category: 'thriller',
                     movie_id: idx
                 });
-
             }
         }
-        return Promise.resolve(data);
+      return Promise.resolve(data);
     }

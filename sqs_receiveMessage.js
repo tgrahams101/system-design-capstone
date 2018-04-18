@@ -23,23 +23,18 @@ const params = {
   WaitTimeSeconds: 0
 };
 
-
 for (var i = 0; i < 20; i++)  {
 
   sqs.receiveMessage(params, (err, data) => {
     if (err) {
-      console.log('Receive Error', err);
     } else if (data.Messages) {
-      console.log('DATA OBJECT', JSON.stringify(data));
       const deleteParams = {
         QueueUrl: inboxUrl,
         ReceiptHandle: data.Messages[0].ReceiptHandle
       };
       sqs.deleteMessage(deleteParams, (err, data) => {
         if (err) {
-          console.log('Delete Error', err);
         } else {
-          console.log('Message Deleted', data);
         }
       });
     }
